@@ -1,0 +1,259 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+
+\title{JAiO zadanie 1}
+\author{Dominik Wawszczak}
+\date{2023-03-29}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak
+	
+	numer indeksu: 440014
+	
+	numer grupy: 6
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Zadanie 1.1}
+	
+	\medskip
+	
+	Rozpatrzmy dowolny język regularny \(L \subseteq A^{\ast}\). Udowodnimy, że
+	język \(\text{EvenLen}(L)\) również jest regularny.
+	
+	\medskip
+	
+	Weźmy automat deterministyczny \(\mathcal{A} = \left( A, Q, q_0, F, \delta
+	\right)\) taki, że \(L(\mathcal{A}) = L\). Wskażemy automat deterministyczny
+	\(\mathcal{A}' = \left( \{1\}, Q', q'_{0}, F', \delta' \right)\), dla
+	którego \(L \left( \mathcal{A}' \right) = \text{EvenLen}(L)\).
+	
+	\medskip
+	
+	Niech:
+	\begin{itemize}
+		\item \(Q' = 2^{Q}\),
+		\item \(q'_{0} = \{q_0\}\),
+		\item \(F' = \left\{ X \in Q' \ : \ |X \cap F| \mod 2 = 0
+		      \right\}\),
+		\item \(\delta'(X, 1) = \bigoplus\limits_{(q, a) \in X \times A}
+		      \left\{ \delta(q, a) \right\} \).
+	\end{itemize}
+	
+	\medskip
+	
+	Wprowadźmy następującą definicję:
+	\[ f_{n} (q) \ = \ \left| \left\{ w \in A^{\ast} \ : \ |w| = n \ \wedge \
+	\hat{\delta} \left( q_0, w \right) = q \right\} \right| \text{.} \]
+	Innymi słowy, \(f_{n} (q)\) jest liczbą słów \(w \in A^{\ast}\) o długości
+	\(n\) spełniających \(\hat{\delta} \left( q_0, w \right) = q\).
+	
+	\medskip
+	
+	\textbf{Lemat 1}
+	
+	\[ f_{n + 1} (r) \ = \ \sum\limits_{\left\{ (q, a) \in Q \times A \ : \
+	\delta (q, a) = r \right\}} f_{n} (q) \text{.} \]
+	Warto zwrócić uwagę, że \(f_{n} (q)\) pojawi się w tej sumie tyle razy, ile
+	jest liter \(a \in A\) spełniających \(\delta (q, a) = r\).
+	
+	\medskip
+	
+	\textbf{Dowód lematu 1}
+	
+	\medskip
+	
+	Każde słowo \(v \in A^{\ast}\) o długości \(n + 1\) spełniające
+	\(\hat{\delta} \left( q_0, v \right) = r\) możemy przedstawić w postaci \(v
+	= wa\), gdzie \(a \in A\) jest jego ostatnią literą. Wtedy \(\hat{\delta}
+	\left( q_0, w \right) = q\), dla pewnego stanu \(q \in Q\) spełniającego
+	\(\delta (q, a) = r\). Dla konkretnego stanu \(q \in Q\) oraz konkretnej
+	litery \(a \in A\), słów \(w \in A^{\ast}\) o długości \(n\) spełniających
+	\(\hat{\delta} \left( q_0, w \right) = q\) jest dokładnie \(f_{n} (q)\).
+	Wynika z tego, że jest dokładnie \(f_{n} (q)\) słów o długości \(n + 1\)
+	postaci \(wa\) takich, że \(\hat{\delta} \left( q_0, w \right) = q\),
+	dlatego należy zsumować \(f_{n} (q)\) dla każdej pary \((q, a) \in Q \times
+	A\) spełniającej \(\delta (q, a) = r\), co kończy dowód lematu.
+	
+	\medskip
+	
+	Wprowadźmy teraz kolejną definicję:
+	\[ g_{n} (q) \ = \ f_{n} (q) \mod 2 \text{.} \]
+	Innymi słowy, \(g_{n} (q) = 0\), jeśli jest parzyście wiele słów \(w \in
+	A^{\ast}\) o długości \(n\) spełniających \(\hat{\delta} \left( q_0, w
+	\right) = q\), albo \(g_{n} (q) = 1\), jeżeli jest nieparzyście wiele takich
+	słów.
+	
+	\medskip
+	
+	\textbf{Lemat 2}
+	
+	\[ g_{n + 1} (r) \ = \ \left| \left\{ (q, a) \in Q \times A \ : \ \delta (q,
+	a) = r \ \wedge \ g_{n} (q) = 1 \right\} \right| \mod 2 \text{.} \]
+	
+	\newpage
+	
+	\textbf{Dowód lematu 2}
+	
+	\medskip
+	
+	Zgodnie z definicją:
+	\begin{align*}
+		g_{n + 1} (r) \ &= \ f_{n + 1} (r) \mod 2 \ = \ \left(
+		\sum\limits_{\left\{ (q, a) \in Q \times A \ : \ \delta (q, a) = r
+		\right\}} f_{n} (q) \right) \mod 2 \ = \\[0.2 cm]
+		&= \ \left( \sum\limits_{\left\{ (q, a) \in Q \times A \ : \ \delta (q,
+		a) = r \right\}} g_{n} (q) \right) \mod 2 \ = \\[0.2 cm]
+		&=\ \left( \sum\limits_{\left\{ (q, a) \in Q \times A \ : \ \delta (q,
+		a) = r \ \wedge \ g_{n} (q) = 1 \right\}} 1 \right) \mod 2 \ =
+		\\[0.2 cm]
+		&= \ \left| \left\{ (q, a) \in Q \times A \ : \ \delta (q, a) = r \
+		\wedge \ g_{n} (q) = 1 \right\} \right| \mod 2 \text{,}
+	\end{align*}
+	co kończy dowód lematu.
+	
+	\medskip
+	
+	\textbf{Lemat 3}
+	
+	\[ q \ \in \ \hat{\delta'} \left( q'_{0}, 1^n \right) \quad \iff \quad g_{n}
+	(q) \ = \ 1 \text{.} \]
+	
+	\textbf{Dowód lematu 3}
+	
+	\medskip
+	
+	Skorzystamy z indukcji po \(n\).
+	
+	\medskip
+	
+	\underline{Pierwszy krok}: Dla \(n = 0\) mamy
+	\[ \hat{\delta'} \left( q'_{0}, 1^{0} \right) \ = \ \hat{\delta'} \left(
+	q'_{0}, \varepsilon \right) \ = \ q'_{0} \ = \ \left\{ q_{0} \right\}
+	\text{.} \]
+	Rzeczywiście, \(g_{0} \left( q_0 \right) = 1\), ponieważ jedyne słowo w
+	\(A^{\ast}\) o długośći \(0\) to \(\varepsilon\) i spełnia ono
+	\(\hat{\delta} \left( q_0, \varepsilon \right) = q_0\). Wynika z tego, że
+	\(g_{0} (q) = 0\), dla każdego \(q \neq q_0\).
+	
+	\medskip
+	
+	\underline{Krok indukcyjny}: Zauważmy, że
+	\[ \hat{\delta'} \left( q'_{0}, 1^{n + 1} \right) \ = \ \delta' \left(
+	\hat{\delta'} \left( q'_{0}, 1^{n} \right), 1 \right) \ = \
+	\bigoplus\limits_{(q, a) \in \hat{\delta'} \left( q'_{0}, 1^{n} \right)
+	\times A} \left\{ \delta(q, a) \right\} \text{.} \]
+	Wynika z tego, że następujące warunki są równoważne:
+	\begin{flalign*}
+		\quad 1.& \quad r \ \in \ \hat{\delta'} \left( q'_{0}, 1^{n + 1} \right)
+		                \text{,} & \\[0.2 cm]
+		\quad 2.& \quad r \ \in \ \bigoplus\limits_{(q, a) \in \hat{\delta'}
+		                \left( q'_{0}, 1^{n} \right) \times A} \left\{ \delta(q,
+		                a) \right\} \text{,} & \\[0.2 cm]
+		\quad 3.& \quad \! \left| \left\{(q, a) \in \hat{\delta'} \left( q'_{0},
+		                1^{n} \right) \times A \ : \ \delta(q, a) = r \right\}
+		                \right| \mod 2 \ = \ 1 \text{,} & \\[0.2 cm]
+		\quad 4.& \quad \! \left| \left\{(q, a) \in Q \times A \ : \ \delta(q,
+		                a) = r \ \wedge \ q \in \hat{\delta'} \left( q'_{0},
+		                1^{n} \right) \right\} \right| \mod 2 \ = \ 1 \text{,}
+		                & \\[0.2 cm]
+		\quad 5.& \quad \! \left| \left\{ \left( q, a \right) \in Q \times A \ :
+		                \ \delta(q, a) = r \ \wedge \ g_{n} (q) = 1 \right\}
+		                \right| \mod 2 \ = \ 1 \text{,} & \\[0.2 cm]
+		\quad 6.& \quad g_{n + 1} (r) \ = \ 1 \text{,} &
+	\end{flalign*}
+	co kończy dowód lematu.
+	
+	Na podstawie powyższego wnioskujemy równoważność następujących
+	warunków:
+	\begin{flalign*}
+		\quad 1.& \quad 1^{n} \ \in \ L(\mathcal{A}') \text{,} & \\[0.2 cm]
+		\quad 2.& \quad \hat{\delta'} \left( q'_{0}, 1^{n} \right) \ \in \ F'
+		                \text{,} & \\[0.2 cm]
+		\quad 3.& \quad \! \left| \left\{ q \ : \ q \in \hat{\delta'} \left(
+		                q'_{0}, 1^{n} \right) \ \wedge \ q \in F \right\}
+		                \right| \mod 2 \ = \ 0 \text{,} & \\[0.2 cm]
+		\quad 4.& \quad \! \left| \left\{ q \ : \ g_{n} (q) = 1 \ \wedge \ q \in
+		                F \right\} \right| \mod 2 \ = \ 0 \text{,} & \\[0.2 cm]
+		\quad 5.& \quad \! \left( \sum\limits_{q \in F} g_{n} (q) \right) \mod 2
+		                \ = \ 0 \text{,} & \\[0.2 cm]
+		\quad 6.& \quad \! \left( \sum\limits_{q \in F} f_{n} (q) \right) \mod 2
+		                \ = \ 0 \text{,} \\[0.2 cm]
+		\quad 7.& \quad \! \left| \left\{ w \in A^{\ast} \ : \ |w| = n \ \wedge
+		                \ \hat{\delta} \left( q_0, w \right) \in F \right\}
+		                \right| \mod 2 \ = \ 0 \text{,} & \\[0.2 cm]
+		\quad 8.& \quad \! \left| \left\{ w \in L \ : \ |w| = n \right\} \right|
+		                \mod 2 \ = \ 0 \text{,} &
+	\end{flalign*}
+	co kończy rozwiązanie zadania.
+	\begin{flushright}
+		\(\Box\)
+	\end{flushright}
+	
+	\bigskip
+	
+	\textbf{Zadanie 1.2}
+	
+	\medskip
+	
+	Rozpatrzmy język regularny \(L = a^{\ast}ba^{\ast}\) nad alfabetem \(\{a,
+	b\}\). Zauważmy, że dla każdego \(k \in \mathbb{Z}^{+} \cup \{0\}\) zachodzi
+	\[ \left\{ w \in L \ : \ |w| = k \right\} \ = \ \left\{
+	a^{i}ba^{k - 1 - i} \ : \ i \in [0, k - 1] \cap \mathbb{Z} \right\} \text{,}
+	\]
+	czyli w \(L\) jest dokładnie \(k\) słów o długości \(k\).
+	
+	\medskip
+	
+	Z powyższego wynika, że
+	\[ \text{SquareLen}(L) \ = \ \left\{ 1^{k} \ : \ \underset{l \in
+	\mathbb{Z}^{+} \cup \{0\}}{\exists} \ k = l^{2} \right\} \text{.} \]
+	Udowodnimy, że język ten nie jest regularny. W tym celu skorzystamy z lematu
+	o pompowaniu.
+	
+	\medskip
+	
+	Niech \(n\) będzie stałą z lematu o pompowaniu. Weźmy dowolne słowo \(w \in
+	\text{SquareLen}(L)\) spełniające \(|w| \geqslant n\). Wtedy \(w = xyz\),
+	gdzie \(|y| > 0\), przy czym dla każdego \(m \in \mathbb{Z}^{+}\) zachodzi
+	\(xy^{m}z \in \text{SquareLen}(L)\). Niech \(x = 1^{a}\), \(y = 1^{b}\) oraz
+	\(z = 1^{c}\). Wówczas
+	\[ \underset{m \in \mathbb{Z}^{+}}{\forall} \ \underset{l \in
+	\mathbb{Z}^{+} \cup \{0\}}{\exists} \ a + mb + c \ = \ l^2 \text{.} \]
+	
+	\medskip
+	
+	Rozpatrzmy \(m = b\). Wtedy \(a + b^{2} + c = l_{b}^2\), dla pewnego
+	\(l_{b} \in \mathbb{Z}^{+} \cup \{0\}\), przy czym \(l_{b} \geqslant b\),
+	gdyż \(l_{b}^{2} = a + b^{2} + c \geqslant b^{2}\). Z drugiej strony, biorąc
+	\(m = b + 1\) otrzymamy, że istnieje \(l_{b + 1} \in \mathbb{Z}^{+} \cup
+	\{0\}\) spełniające \(a + b(b + 1) + c = l_{b + 1}^{2}\). Łatwo zauważyć, że
+	\(l_{b + 1} \geqslant l_{b} + 1\), ponieważ
+	\[ l_{b + 1}^{2} \ = \ a + b(b + 1) + c \ > \ a + b^{2} + c \ = \
+	l_{b}^{2} \text{.} \]
+	
+	\medskip
+	
+	Z powyższego wynika, że
+	\[ b \ = \ l_{b + 1}^{2} - l_{b}^{2} \ \geqslant \ \left( l_{b} + 1 \right)
+	^ {2} - l_{b}^{2} \ = \ 2l_{b} + 1 \ \geqslant \ 2b + 1 \text{,} \]
+	czyli sprzeczność, co kończy rozwiązanie zadania.
+	\begin{flushright}
+		\(\Box\)
+	\end{flushright}
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+
+\title{JAiO zadanie 2}
+\author{Dominik Wawszczak}
+\date{2023-04-20}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak
+	
+	numer indeksu: 440014
+	
+	numer grupy: 6
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Zadanie 2.1}
+	
+	\medskip
+	
+	Rozpatrzmy gramatykę bezkontekstową \(\mathcal{G} = \left( \{a, b\}, \{S, X,
+	Y, Z\}, P, S \right)\) z produkcjami:
+	\begin{itemize}
+		\item \(S \longrightarrow aXbYa \mid a\),
+		\item \(X \longrightarrow ZaXb \mid \varepsilon\),
+		\item \(Y \longrightarrow bYaZ \mid \varepsilon\),
+		\item \(Z \longrightarrow bZ \mid \varepsilon\).
+	\end{itemize}
+	
+	\medskip
+	
+	Rozpocznijmy od udowodnienia, że \(X\) generuje wszystkie słowa postaci
+	\(b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}}\), gdzie \(n_{k} = k - 1\). W
+	tym celu skorzystamy z indukcji matematycznej po długości słowa \(w\)
+	generowanego przez \(X\).
+	
+	\medskip
+	
+	\textbf{Pierwszy krok.} Jeżeli \(\left| w \right| = 0\), to \(w =
+	\varepsilon\), czyli \(k = 1\), a \(n_{1} = 0 = k - 1\).
+	
+	\medskip
+	
+	\textbf{Krok indukcyjny.} Dla słowa \(w\) o długości \(n\) większej niż
+	\(0\) pierwszą użytą produkcją musi być \(X \longrightarrow ZaXb\). Łatwo
+	zauważyć, że \(Z\) generuje język \(b^{\ast}\), zatem dla pewnego \(w' =
+	b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}}\), gdzie \(n_k = k - 1\),
+	zachodzi
+	\[ w \ = \ b^{n_{0}} a w' b \ = \ b^{n_{0}} a b^{n_{1}} a b^{n_{2}} a \ldots
+	a b^{n_{k} + 1} \text{.} \]
+	Zmieniając nieco oznaczenia kolejnych wykładników dostajemy tezę.
+	
+	\medskip
+	
+	Wykażemy teraz, że każde słowo postaci \(b^{n_{1}} a b^{n_{2}} a \ldots a
+	b^{n_{k}}\), gdzie \(n_{k} = k - 1\) jest generowane przez \(X\). Niech więc
+	\(w = b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}}\), gdzie \(n_{k} = k - 1\).
+	Skorzystajmy \(k - 1\) razy z produkcji \(X \longrightarrow ZaXb\), a
+	następnie z produkcji \(X \longrightarrow \varepsilon\), otrzymując
+	\[ \underbrace{Z a Z a \ldots a Z a}_{k - 1 \ \text{wystąpień} \ Z a} b^{k - 1}
+	\text{.} \]
+	Z każdego nieterminala \(Z\) możemy uzyskać odpowiednią liczbę wystąpień
+	smymbolu \(b\), otrzymując słowo \(w\), co kończy dowód.
+	
+	\medskip
+	
+	Analogicznie dowodzimy, że \(Y\) generuje wszystkie słowa postaci
+	\(b^{m_{1}} a b^{m_{2}} a \ldots a b^{m_{l}}\), gdzie \(m_{1} = l - 1\).
+	
+	\medskip
+	
+	Z powyższego wnioskujemy, że \(S\), oprócz słowa \(a\), generuje słowa
+	postaci
+	\[ a b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}} b b^{m_{1}} a b^{m_{2}} a
+	\ldots a b^{m_{l}} a \text{,} \quad \text{gdzie} \quad n_{k} = k - 1 \quad
+	\text{oraz} \quad m_{1} = l - 1 \text{.} \]
+	Inaczej, po zmienieniu oznaczeń i uproszczeniu, są to słowa postaci
+	\[ a b^{n_{1}} a b^{n_{2}}a \ldots a b^{n_{k}} a \text{,} \quad \text{gdzie}
+	\quad \underset{i \in \left[ 1, k \right] \cap \mathbb{Z}}{\exists} \ n_{i}
+	= k \text{.} \]
+	
+	\medskip
+	
+	Łatwo też pokazać, że każde słowo tej postacji jest generowane przez \(S\).
+	Dla \(w = a b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}} a\) takiego, że
+	\(n_{i} = k\), dla konkretnego \(i \in \left[ 1, k \right] \cap
+	\mathbb{Z}\). Wówczas po skorzystaniu z produkcji \(S \longrightarrow
+	aXbYa\) wystarczy z \(X\) wygenerować słowo \(b^{n_{1}} a \ldots a
+	b^{n_{i - 1}} a b^{i - 1}\), a z \(Y\) słowo \(b^{k - i} a b^{n_{i + 1}} a
+	\ldots a b^{n_{k}}\).
+	
+	\medskip
+	
+	Z powyższego wynika, że \(L \left( \mathcal{G} \right) = L_{\exists}\), co
+	kończy rozwiązanie zadania.
+	
+	\newpage
+	
+	\textbf{Zadanie 2.2}
+	
+	\medskip
+	
+	Na początek zauważmy, że
+	\[ L_{\forall} \ = \ \left\{ a \left( b^{n} a \right) ^ {n} \ : \ n \in
+	\mathbb{Z}^{+} \cup \{0\} \right\} \text{,} \]
+	co wynika wprost z definicji języka \(L_{\forall}\). Wnioskujemy stąd, że
+	dla każdego \(n \in \mathbb{Z}^{+}\) istnieje dokładnie jedno słowo \(w \in
+	L_{\forall}\) spełniające \(\#_{a} \left( w \right) = n\) i jest to słowo
+	\(a \left( b^{n - 1} a \right) ^ {n - 1}\).
+	
+	\medskip
+	
+	Udowodnimy, że język \(L_{\forall}\) nie jest bezkontekstowy. W tym celu
+	skorzystamy z lematu o pompowaniu dla języków bezkontekstowych. Niech
+	więc \(N\) będzie stałą z lematu o pompowaniu dla języka \(L_{\forall}\).
+	
+	\medskip
+	
+	Weźmy słowo \(w = a \left( b^{N} a \right) ^ {N} \in L_{\forall}\). Wówczas
+	\(|w| \geqslant N\), zatem istnieje faktoryzacja
+	\[ w \ = \ prefix \cdot left \cdot infix \cdot right \cdot suffix \]
+	taka, że dla dowolnego \(k \in \mathbb{Z}^{+} \cup \{0\}\) zachodzi
+	\[ prefix \cdot left^{k} \cdot infix \cdot right^{k} \cdot suffix \ \in \
+	L_{\forall} \text{,} \]
+	przy czym \(\left| left \cdot right \right| \geqslant 1\) oraz \(\left| left
+	\cdot infix \cdot right \right| \leqslant N\). Niech \(m = \left| left \cdot
+	right \right|\). Oczywiście \(1 \leqslant m \leqslant N\).
+	
+	\medskip
+	
+	Z powyższego wnioskujemy, że
+	\(\#_{a} \left( left \cdot infix \cdot right \right) \leqslant 1\), mamy
+	więc dwa przypadki:
+	\begin{enumerate}
+		\item \(\#_{a} \left( left \cdot right \right) = 0\)
+		      
+		      Wtedy \(\#_{b} \left( left \cdot right \right) = \left| left \cdot
+		      right \right| = m\). Rozpatrzmy słowo
+		      \[ w' \ = \ prefix \cdot left^{2} \cdot infix \cdot right^{2}
+		      \cdot suffix \text{.} \]
+		      Z lematu o pompowaniu wynika, że \(w' \in L_{\forall}\). Zauważmy,
+		      że
+		      \[ \#_{a} \left( w' \right) \ = \ N + 1 \ = \ \#_{a} \left( w
+		      \right) \quad \text{oraz} \quad \#_{b} \left( w' \right) \ = \
+		      N^{2} + m \ > \ N^{2} \ = \ \#_{b} \left( w \right) \text{,} \]
+		      zatem \(w' \neq w\). Otrzymujemy więc sprzeczność z poczynioną
+		      na początku obserwacją.
+		
+		\item \(\#_{a} \left( left \cdot right \right) = 1\)
+		      
+		      Wówczas \(\#_{b} \left( left \cdot right \right) = \left| left
+		      \cdot right \right| - 1 = m - 1\). Ponownie będziemy rozpatrywać
+		      słowo
+		      \[ w' \ = \ prefix \cdot left^{2} \cdot infix \cdot right^{2}
+		      \cdot suffix \text{,} \]
+		      które oczywiście należy do języka \(L_{\forall}\). Niech \(v = a
+		      \left( b^{N + 1} a \right) ^ {N + 1} \in L_{\forall}\). Łatwo
+		      zauważyć, że
+		      \[ \#_{a} \left( w' \right) \ = \ \#_{a} \left( w \right) + 1 \ =
+		      \ N + 2 \ = \ \#_{a} \left( v \right) \text{.} \]
+		      Ponadto
+		      \[ \#_{b} \left( w' \right) \ = \ \#_{b} \left( w \right) + m - 1
+		      \ = \ N^{2} + m - 1 \ \leqslant \ N^2 + N - 1 \ < \ \left( N + 1
+		      \right) ^ {2} \ = \ \#_{b} \left( v \right) \text{,} \]
+		      toteż \(w' \neq v\). Tym razem również dostajemy sprzeczność z
+		      obserwacją z początku, co kończy rozwiązanie zadania.
+	\end{enumerate}
+\end{document}
