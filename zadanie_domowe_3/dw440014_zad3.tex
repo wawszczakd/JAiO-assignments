@@ -39,9 +39,9 @@
 	
 	Przypuśćmy nie wprost, że \(L = L \left( \mathcal{H} \right)\), dla pewnej
 	maszyny Turinga \(\mathcal{H}\), która zawsze terminuje i zostawia na taśmie
-	\(1\), jeżeli wejściowy napis jest postaci \(u_1 \$ u_2\), gdzie \(u_1\) i
-	\(u_2\) są kodami podobnych maszyn Turinga, lub \(0\) w przeciwnym wypadku.
-	Wskażemy redukcję
+	\(1\), jeżeli wejściowy napis jest postaci \(u_{1} \$ u_{2}\), gdzie
+	\(u_{1}\) i \(u_{2}\) są kodami podobnych maszyn Turinga, lub \(0\) w
+	przeciwnym wypadku. Wskażemy redukcję
 	\[ \text{HALT}_{\varepsilon} \ \leqslant_{f} \ L \text{,} \]
 	co da oczywistą sprzeczność, gdyż problem \(\text{HALT}_{\varepsilon}\) jest
 	nierozstrzygalny.
@@ -89,5 +89,83 @@
 	
 	\bigskip
 	
+	Udowodnimy teraz, że dopełnienie języka \(L\) jest częściowo obliczalne.
 	
+	\medskip
+	
+	Stwórzmy maszynę Turinga \(\mathcal{M}\), która na wejściu przyjmuje słowo
+	postaci \(u_{1} \$ u_{2}\) i terminuje jeżeli \(u_{1}\) i \(u_{2}\) są
+	kodami maszyn Turinga, które nie są podobne. Maszyna \(\mathcal{M}\) będzie
+	symulować działanie maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\)
+	na wszystkich możliwych wejściach \(w \in \left\{ 0, 1 \right\} ^ {\ast}\),
+	aż znajdzie wejście na którym dają one różne wyniki, stwierdzając przy tym,
+	że nie są podobne.
+	
+	\medskip
+	
+	Biorąc dowolną obliczalną bijekcję \(g : \mathbb{Z}^{+} \cup \left\{ 0
+	\right\} \rightarrow \left\{ 0, 1 \right\} ^ {\ast}\) możemy łatwo symulować
+	działanie maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) na
+	wszystkich możliwych wejściach, biorąc wartości funkcji \(g\) dla kolejnych
+	liczb całkowitych nieujemnych. Przykładem takiej bijekcji jest funkcja:
+	\[ g \left( n \right) \ = \ \text{zapis binarny liczby} \ n + 1 \ \text{bez
+	pierwszego znaku.} \]
+	Wówczas kilka pierwszych wartości funkcji \(g\) to: \(\varepsilon, 0, 1, 00,
+	01, 10, 11, 000, 001, 010, 011, 100 \ldots\).
+	
+	\medskip
+	
+	Problem napotkamy w momencie, gdy co najmniej jedna z maszyn
+	\(\mathcal{M}_{u_{1}}\), \(\mathcal{M}_{u_{2}}\) nie terminuje na pewnym
+	wejściu, a obie terminują i dają inne wyniki na innym, jeszcze nie
+	rozpatrzonym wejściu. Aby rozwiązać ten problem nie będziemy symulować
+	maszyn na wszystkich możliwych wejściach po kolei, lecz sumulację będziemy
+	przeprowadzać równolegle, na coraz większej liczbie wejść.
+	
+	\medskip
+	
+	Na ćwiczeniach omawiane była, że dowolna maszyna Turinga zamiast działać na
+	taśmie jednowymiarowej, może działać na taśmie dwuwymiarowej. Główna idea
+	opierała się na tym, żeby na taśmie trzymać wszystkie trójki \(\left(
+	\text{wiersz}, \text{kolumna}, \text{wartość} \right)\) wykorzystywanych
+	pól, jednak nie będę zagłębiał się w szczegóły.
+	
+	\medskip
+	
+	Maszyna \(\mathcal{M}\) będzie działała w fazach, trzymając numer aktualnej
+	fazy na taśmie. W \(n\)-tej fazie będzie przeprowadzać po jednym kroku
+	symulacji obu maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\)
+	na pierwszych \(n\) wejściach, tj. \(\left\{ g \left( 0 \right), g \left( 1
+	\right), g \left( 2 \right), \ldots, g \left( n \right) \right\}\).
+	
+	\medskip
+	
+	Kilka początkowych wierszy (taśm) naszej dwuwymiarowej taśmy jest potrzebne
+	na istotne rzeczy takie jak: kody \(u_{1}\) i \(u_{2}\), numer aktualnej
+	fazy i inne informacje potrzebne do pełnego sformalizowania działania
+	maszyny \(\mathcal{M}\). Niech więc \(k\) bedzie numerem pierwszego
+	nieużywanego wiersza. Wykorzystamy go do symulowania działania maszyny
+	\(\mathcal{M}_{u_{1}}\) na \(g \left( 0 \right)\). Wiersz \(k + 1\)
+	natomiast zostanie wykorzystany do symulacji maszyny \(\mathcal{M}_{u_{2}}\)
+	na \(g \left( 0 \right)\). Kolejne wiersze będą wykorzystywane do
+	symulowania \(\mathcal{M}_{u_{1}}\) lub \(\mathcal{M}_{u_{2}}\) w zależności
+	od parzystości numeru wiersza, na odpowiednich wartościach funkcji \(g\).
+	
+	\medskip
+	
+	Jeżeli maszyny \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) nie są
+	podobne, to maszyna \(\mathcal{M}\) w skończonym czasie znajdzie wejście,
+	na którym obie maszyny \(\mathcal{M}_{u_{1}}\), \(\mathcal{M}_{u_{2}}\)
+	terminują, dając różne wyniki, po czym sama również sterminuje.
+	
+	\bigskip
+	
+	Aby dokończyć rozwiązanie zadania, możemy zauważyć, że język \(L\) nie jest
+	częściowo obliczalny, gdyż w przeciwnym wypadku język \(L\) byłby
+	obliczalny, co było pokazane na wykładzie.
+	
+	\bigskip
+	
+	Z powyższego wynika, że odpowiedzi to na pytanie zawarte w podpunktach
+	a), b) oraz c) to kolejno ,,Nie.'', ,,Nie.'' oraz ,,Tak.''.
 \end{document}
