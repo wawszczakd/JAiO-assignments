@@ -14,7 +14,7 @@
 
 \title{JAiO zadanie 3}
 \author{Dominik Wawszczak}
-\date{2023-05-??}
+\date{2023-05-25}
 
 \begin{document}
 	\setlength{\parindent}{0 cm}
@@ -37,44 +37,57 @@
 	
 	\medskip
 	
-	Przypuśćmy nie wprost, że istnieje maszyna turinga \(\mathcal{H}\), która
-	zawsze terminuje i zostawia na taśmie \(1\), jeżeli wejściowy napis jest
-	postaci \(u_1 \$ u_2\), gdzie \(u_1\) i \(u_2\) są kodami podobnych maszyn
-	Turinga, lub \(0\) w przeciwnym wypadku. Rozwiążemy problem
-	\(HALT_{\varepsilon}\) wykorzystując maszynę \(\mathcal{H}\), co da
-	oczywistą sprzeczność, gdyż problem \(HALT_{\varepsilon}\) jest
+	Przypuśćmy nie wprost, że \(L = L \left( \mathcal{H} \right)\), dla pewnej
+	maszyny Turinga \(\mathcal{H}\), która zawsze terminuje i zostawia na taśmie
+	\(1\), jeżeli wejściowy napis jest postaci \(u_1 \$ u_2\), gdzie \(u_1\) i
+	\(u_2\) są kodami podobnych maszyn Turinga, lub \(0\) w przeciwnym wypadku.
+	Wskażemy redukcję
+	\[ \text{HALT}_{\varepsilon} \ \leqslant_{f} \ L \text{,} \]
+	co da oczywistą sprzeczność, gdyż problem \(\text{HALT}_{\varepsilon}\) jest
 	nierozstrzygalny.
 	
 	\medskip
 	
-	Niech więc \(\mathcal{M}\) będzie dowolną maszyną Turinga. Stwórzmy maszynę
-	\(\mathcal{M}'\) działającą w następujący sposób:
+	Weźmy funkcję \(f\) o następującej definicji:
+	\[ f \left( \text{kod} \left( \mathcal{M} \right) \right) \ = \ \left\langle
+	\text{kod} \left( \mathcal{M} \right), \text{kod} \left( \mathcal{M}'
+	\right) \right\rangle \text{,} \]
+	gdzie \(\mathcal{M}\) jest dowolną maszyną Turinga, a \(\mathcal{M}'\)
+	maszyną Turinga działającą w sposób opisany poniżej:
 	\begin{itemize}
 		\item jeśli wejściowym napisem jest \(\varepsilon\), to maszyna
 		      \(\mathcal{M}'\) najpierw symuluje działanie maszyny
 		      \(\mathcal{M}\) na tym napisie, a następnie w miejsce wystąpienia
 		      pierwszego blanka wpisuje \(1\) i kończy działanie;
 		\item w przeciwnym wypadku symuluje działanie maszyny \(\mathcal{M}\) na
-		      napisie wejściowym, a następnie kończy działanie.
+		      napisie wejściowym, po czym kończy działanie.
 	\end{itemize}
-	Wykorzysując maszynę \(\mathcal{H}\) możemy stwierdzić czy maszyny
-	\(\mathcal{M}\) i \(\mathcal{M}'\) są podobne.
+	Funkcja \(f\) jest oczywiście obliczalna.
 	
 	\medskip
 	
 	Zauważmy, że
 	\[ \mathcal{M} \ \text{terminuje na} \ \varepsilon \quad \iff \quad
 	\text{maszyny} \ \mathcal{M} \ \text{oraz} \ \mathcal{M}' \ \text{nie są
-	podobne.} \]
-	Wynika to z tego, że jeśli \(\mathcal{M}\) terminuje na \(\varepsilon\),
+	podobne,} \]
+	czyli równoważnie
+	\[ \text{kod} \left( \mathcal{M} \right) \ \in \ \text{HALT}_{\varepsilon}
+	\quad \iff \quad \left\langle \text{kod} \left( \mathcal{M} \right),
+	\text{kod} \left( \mathcal{M}' \right) \right\rangle \ \notin \ L
+	\text{.} \]
+	Wynika to z tego, że jeżeli \(\mathcal{M}\) terminuje na \(\varepsilon\),
 	to \(\mathcal{M}'\) również terminuje na \(\varepsilon\), jednak daje inny
-	wynik. Z drugiej strony, jeśli maszyny \(\mathcal{M}\) oraz
-	\(\mathcal{M}'\) nie są podobne, to \(\mathcal{M}\) nie terminuje na
-	\(\varepsilon\), ponieważ w przeciwnym wypadku \(\mathcal{M}'\) również
+	wynik. Z drugiej strony, jeśli maszyny \(\mathcal{M}\) oraz \(\mathcal{M}'\)
+	nie są podobne, to \(\mathcal{M}\) terminuje na \(\varepsilon\), ponieważ w
+	przeciwnym wypadku, obie maszyny \(\mathcal{M}\) oraz\(\mathcal{M}'\) nie
 	terminowałaby na \(\varepsilon\), dając jednak inny wynik. Z implikacji w
 	obie strony dostajemy więc równoważność.
 	
 	\medskip
 	
 	Z powyższego wynika, że język \(L\) nie jest obliczalny.
+	
+	\bigskip
+	
+	
 \end{document}
