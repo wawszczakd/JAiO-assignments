@@ -79,7 +79,7 @@
 	to \(\mathcal{M}'\) również terminuje na \(\varepsilon\), jednak daje inny
 	wynik. Z drugiej strony, jeśli maszyny \(\mathcal{M}\) oraz \(\mathcal{M}'\)
 	nie są podobne, to \(\mathcal{M}\) terminuje na \(\varepsilon\), ponieważ w
-	przeciwnym wypadku, obie maszyny \(\mathcal{M}\) oraz\(\mathcal{M}'\) nie
+	przeciwnym wypadku, obie maszyny \(\mathcal{M}\) oraz \(\mathcal{M}'\) nie
 	terminowałaby na \(\varepsilon\), dając jednak inny wynik. Z implikacji w
 	obie strony dostajemy więc równoważność.
 	
@@ -93,13 +93,13 @@
 	
 	\medskip
 	
-	Stwórzmy maszynę Turinga \(\mathcal{M}\), która na wejściu przyjmuje słowo
-	postaci \(u_{1} \$ u_{2}\) i terminuje jeżeli \(u_{1}\) i \(u_{2}\) są
-	kodami maszyn Turinga, które nie są podobne. Maszyna \(\mathcal{M}\) będzie
-	symulować działanie maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\)
-	na wszystkich możliwych wejściach \(w \in \left\{ 0, 1 \right\} ^ {\ast}\),
-	aż znajdzie wejście na którym dają one różne wyniki, stwierdzając przy tym,
-	że nie są podobne.
+	Stworzymy maszynę Turinga \(\mathcal{M}\), która na wejściu będzie
+	przyjmować słowo postaci \(u_{1} \$ u_{2}\) i terminować, jeżeli \(u_{1}\) i
+	\(u_{2}\) są kodami maszyn Turinga, które nie są podobne. Maszyna
+	\(\mathcal{M}\) będzie symulować działanie maszyn \(\mathcal{M}_{u_{1}}\) i
+	\(\mathcal{M}_{u_{2}}\) na wszystkich możliwych wejściach \(w \in \left\{ 0,
+	1 \right\} ^ {\ast}\), aż znajdzie wejście na którym dają one różne wyniki,
+	stwierdzając przy tym, że nie są podobne.
 	
 	\medskip
 	
@@ -124,8 +124,8 @@
 	
 	\medskip
 	
-	Na ćwiczeniach omawiane była, że dowolna maszyna Turinga zamiast działać na
-	taśmie jednowymiarowej, może działać na taśmie dwuwymiarowej. Główna idea
+	Na ćwiczeniach dowodzone było, że dowolna maszyna Turinga, zamiast działać
+	na taśmie jednowymiarowej, może działać na taśmie dwuwymiarowej. Główna idea
 	opierała się na tym, żeby na taśmie trzymać wszystkie trójki \(\left(
 	\text{wiersz}, \text{kolumna}, \text{wartość} \right)\) wykorzystywanych
 	pól, jednak nie będę zagłębiał się w szczegóły.
@@ -136,13 +136,13 @@
 	fazy na taśmie. W \(n\)-tej fazie będzie przeprowadzać po jednym kroku
 	symulacji obu maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\)
 	na pierwszych \(n\) wejściach, tj. \(\left\{ g \left( 0 \right), g \left( 1
-	\right), g \left( 2 \right), \ldots, g \left( n \right) \right\}\).
+	\right), g \left( 2 \right), \ldots, g \left( n - 1 \right) \right\}\).
 	
 	\medskip
 	
 	Kilka początkowych wierszy (taśm) naszej dwuwymiarowej taśmy jest potrzebne
 	na istotne rzeczy takie jak: kody \(u_{1}\) i \(u_{2}\), numer aktualnej
-	fazy i inne informacje potrzebne do pełnego sformalizowania działania
+	fazy i inne informacje niezbędne do pełnego sformalizowania działania
 	maszyny \(\mathcal{M}\). Niech więc \(k\) bedzie numerem pierwszego
 	nieużywanego wiersza. Wykorzystamy go do symulowania działania maszyny
 	\(\mathcal{M}_{u_{1}}\) na \(g \left( 0 \right)\). Wiersz \(k + 1\)
@@ -162,10 +162,10 @@
 	
 	Aby dokończyć rozwiązanie zadania, możemy zauważyć, że język \(L\) nie jest
 	częściowo obliczalny, gdyż w przeciwnym wypadku język \(L\) byłby
-	obliczalny, co było pokazane na wykładzie.
+	obliczalny, co było udowodnione na wykładzie.
 	
 	\bigskip
 	
-	Z powyższego wynika, że odpowiedzi to na pytanie zawarte w podpunktach
-	a), b) oraz c) to kolejno ,,Nie.'', ,,Nie.'' oraz ,,Tak.''.
+	Z powyższego wynika, że odpowiedzi na pytania zawarte w podpunktach a), b)
+	oraz c) to kolejno ,,Nie.'', ,,Nie.'' oraz ,,Tak.''.
 \end{document}
