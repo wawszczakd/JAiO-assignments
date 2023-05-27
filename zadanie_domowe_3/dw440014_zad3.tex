@@ -106,8 +106,9 @@
 	Biorąc dowolną obliczalną bijekcję \(g : \mathbb{Z}^{+} \cup \left\{ 0
 	\right\} \rightarrow \left\{ 0, 1 \right\} ^ {\ast}\) możemy łatwo symulować
 	działanie maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) na
-	wszystkich możliwych wejściach, biorąc wartości funkcji \(g\) dla kolejnych
-	liczb całkowitych nieujemnych. Przykładem takiej bijekcji jest funkcja:
+	wszystkich możliwych wejściach, obliczająć wartości funkcji \(g\) dla
+	kolejnych liczb całkowitych nieujemnych. Przykładem takiej bijekcji jest
+	funkcja:
 	\[ g \left( n \right) \ = \ \text{zapis binarny liczby} \ n + 1 \ \text{bez
 	pierwszego znaku.} \]
 	Wówczas kilka pierwszych wartości funkcji \(g\) to: \(\varepsilon, 0, 1, 00,
@@ -132,7 +133,7 @@
 	
 	\medskip
 	
-	Maszyna \(\mathcal{M}\) będzie działała w fazach, trzymając numer aktualnej
+	Maszyna \(\mathcal{M}\) będzie działać w fazach, trzymając numer aktualnej
 	fazy na taśmie. W \(n\)-tej fazie będzie przeprowadzać po jednym kroku
 	symulacji obu maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\)
 	na pierwszych \(n\) wejściach, tj. \(\left\{ g \left( 0 \right), g \left( 1
@@ -141,15 +142,16 @@
 	\medskip
 	
 	Kilka początkowych wierszy (taśm) naszej dwuwymiarowej taśmy jest potrzebne
-	na istotne rzeczy takie jak: kody \(u_{1}\) i \(u_{2}\), numer aktualnej
+	na istotne rzeczy takie jak np.: kody \(u_{1}\) i \(u_{2}\), numer aktualnej
 	fazy i inne informacje niezbędne do pełnego sformalizowania działania
 	maszyny \(\mathcal{M}\). Niech więc \(k\) bedzie numerem pierwszego
 	nieużywanego wiersza. Wykorzystamy go do symulowania działania maszyny
 	\(\mathcal{M}_{u_{1}}\) na \(g \left( 0 \right)\). Wiersz \(k + 1\)
 	natomiast zostanie wykorzystany do symulacji maszyny \(\mathcal{M}_{u_{2}}\)
 	na \(g \left( 0 \right)\). Kolejne wiersze będą wykorzystywane do
-	symulowania \(\mathcal{M}_{u_{1}}\) lub \(\mathcal{M}_{u_{2}}\) w zależności
-	od parzystości numeru wiersza, na odpowiednich wartościach funkcji \(g\).
+	symulowania \(\mathcal{M}_{u_{1}}\) albo \(\mathcal{M}_{u_{2}}\) w
+	zależności od parzystości numeru wiersza, na odpowiednich wartościach
+	funkcji \(g\).
 	
 	\medskip
 	
@@ -160,12 +162,16 @@
 	
 	\bigskip
 	
-	Aby dokończyć rozwiązanie zadania, możemy zauważyć, że język \(L\) nie jest
+	Aby dokończyć rozwiązanie zadania, należy zauważyć, że język \(L\) nie jest
 	częściowo obliczalny, gdyż w przeciwnym wypadku język \(L\) byłby
 	obliczalny, co było udowodnione na wykładzie.
 	
 	\bigskip
 	
 	Z powyższego wynika, że odpowiedzi na pytania zawarte w podpunktach a), b)
-	oraz c) to kolejno ,,Nie.'', ,,Nie.'' oraz ,,Tak.''.
+	oraz c) to kolejno ,,Nie.'', ,,Nie.'' oraz ,,Tak.'', co kończy rozwiązanie
+	zadania.
+	\begin{flushright}
+		\(\Box\)
+	\end{flushright}
 \end{document}
