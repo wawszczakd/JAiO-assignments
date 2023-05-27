@@ -39,9 +39,9 @@
 	
 	Przypuśćmy nie wprost, że \(L = L \left( \mathcal{H} \right)\), dla pewnej
 	maszyny Turinga \(\mathcal{H}\), która zawsze terminuje i zostawia na taśmie
-	\(1\), jeżeli wejściowy napis jest postaci \(u_{1} \$ u_{2}\), gdzie
-	\(u_{1}\) i \(u_{2}\) są kodami podobnych maszyn Turinga, lub \(0\) w
-	przeciwnym wypadku. Wskażemy redukcję
+	\(1\), jeżeli dostanie na wejściu zakodowaną parę \(\left\langle u_{1},
+	u_{2} \right\rangle\), gdzie \(u_{1}\) i \(u_{2}\) są kodami podobnych
+	maszyn Turinga, lub \(0\) w przeciwnym wypadku. Wskażemy redukcję
 	\[ \text{HALT}_{\varepsilon} \ \leqslant_{f} \ L \text{,} \]
 	co da oczywistą sprzeczność, gdyż problem \(\text{HALT}_{\varepsilon}\) jest
 	nierozstrzygalny.
@@ -77,11 +77,12 @@
 	\text{.} \]
 	Wynika to z tego, że jeżeli \(\mathcal{M}\) terminuje na \(\varepsilon\),
 	to \(\mathcal{M}'\) również terminuje na \(\varepsilon\), jednak daje inny
-	wynik. Z drugiej strony, jeśli maszyny \(\mathcal{M}\) oraz \(\mathcal{M}'\)
-	nie są podobne, to \(\mathcal{M}\) terminuje na \(\varepsilon\), ponieważ w
-	przeciwnym wypadku, obie maszyny \(\mathcal{M}\) oraz \(\mathcal{M}'\) nie
-	terminowałaby na \(\varepsilon\), dając jednak inny wynik. Z implikacji w
-	obie strony dostajemy więc równoważność.
+	wynik, więc nie są podobne. Z drugiej strony, jeśli maszyny \(\mathcal{M}\)
+	oraz \(\mathcal{M}'\) nie są podobne, to \(\mathcal{M}\) terminuje na
+	\(\varepsilon\), ponieważ w przeciwnym wypadku, obie maszyny \(\mathcal{M}\)
+	oraz \(\mathcal{M}'\) nie terminowałyby na \(\varepsilon\), a na wszystkich
+	innych wejściach dawałyby ten sam wynik lub obie by nie terminowały, zatem
+	byłyby podobne. Z implikacji w obie strony dostajemy więc równoważność.
 	
 	\medskip
 	
@@ -94,12 +95,12 @@
 	\medskip
 	
 	Stworzymy maszynę Turinga \(\mathcal{M}\), która na wejściu będzie
-	przyjmować słowo postaci \(u_{1} \$ u_{2}\) i terminować, jeżeli \(u_{1}\) i
-	\(u_{2}\) są kodami maszyn Turinga, które nie są podobne. Maszyna
-	\(\mathcal{M}\) będzie symulować działanie maszyn \(\mathcal{M}_{u_{1}}\) i
-	\(\mathcal{M}_{u_{2}}\) na wszystkich możliwych wejściach \(w \in \left\{ 0,
-	1 \right\} ^ {\ast}\), aż znajdzie wejście na którym dają one różne wyniki,
-	stwierdzając przy tym, że nie są podobne.
+	przyjmować zakodowaną parę \(\left\langle u_{1}, u_{2} \right\rangle\) i
+	terminować, jeżeli \(u_{1}\) i \(u_{2}\) są kodami maszyn Turinga, które nie
+	są podobne. Maszyna \(\mathcal{M}\) będzie symulować działanie maszyn
+	\(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) na wszystkich możliwych
+	wejściach \(w \in \left\{ 0, 1 \right\} ^ {\ast}\), aż znajdzie wejście na
+	którym dają one różne wyniki, stwierdzając przy tym, że nie są podobne.
 	
 	\medskip
 	
@@ -149,13 +150,13 @@
 	\(\mathcal{M}_{u_{1}}\) na \(g \left( 0 \right)\). Wiersz \(k + 1\)
 	natomiast zostanie wykorzystany do symulacji maszyny \(\mathcal{M}_{u_{2}}\)
 	na \(g \left( 0 \right)\). Kolejne wiersze będą wykorzystywane do
-	symulowania \(\mathcal{M}_{u_{1}}\) albo \(\mathcal{M}_{u_{2}}\) w
+	symulowania \(\mathcal{M}_{u_{1}}\) albo \(\mathcal{M}_{u_{2}}\), w
 	zależności od parzystości numeru wiersza, na odpowiednich wartościach
 	funkcji \(g\).
 	
 	\medskip
 	
-	Jeżeli maszyny \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) nie są
+	Jeśli maszyny \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) nie są
 	podobne, to maszyna \(\mathcal{M}\) w skończonym czasie znajdzie wejście,
 	na którym obie maszyny \(\mathcal{M}_{u_{1}}\), \(\mathcal{M}_{u_{2}}\)
 	terminują, dając różne wyniki, po czym sama również sterminuje.
