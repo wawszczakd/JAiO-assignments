@@ -20,11 +20,4 @@ The assignments cover the following topics:
 2. Context-free languages, pushdown automata (PDA)
 3. Turing Machines, decidability, semi-decidability, undecidability
 
-Please refer to the respective assignment directories for detailed solutions and
-accompanying PDF files.
-
-## Conclusion
-
-Feel free to explore the solutions to these assignments. Please note that the
-solutions are in Polish to align with the language of the course. If you have
-any questions or suggestions, feel free to reach out.
+Please refer to the respective assignment directories for detailed solutions.
