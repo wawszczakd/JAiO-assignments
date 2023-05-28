@@ -36,7 +36,7 @@
 	Rozpatrzmy gramatykę bezkontekstową \(\mathcal{G} = \left( \{a, b\}, \{S, X,
 	Y, Z\}, P, S \right)\) z produkcjami:
 	\begin{itemize}
-		\item \(S \longrightarrow aXbYa \mid a\),
+		\item \(S \longrightarrow aXbYa\),
 		\item \(X \longrightarrow ZaXb \mid \varepsilon\),
 		\item \(Y \longrightarrow bYaZ \mid \varepsilon\),
 		\item \(Z \longrightarrow bZ \mid \varepsilon\).
@@ -51,12 +51,12 @@
 	
 	\medskip
 	
-	\textbf{Pierwszy krok.} Jeżeli \(\left| w \right| = 0\), to \(w =
+	\underline{Pierwszy krok}: Jeżeli \(\left| w \right| = 0\), to \(w =
 	\varepsilon\), czyli \(k = 1\), a \(n_{1} = 0 = k - 1\).
 	
 	\medskip
 	
-	\textbf{Krok indukcyjny.} Dla słowa \(w\) o długości \(n\) większej niż
+	\underline{Krok indukcyjny}: Dla słowa \(w\) o długości \(n\) większej niż
 	\(0\) pierwszą użytą produkcją musi być \(X \longrightarrow ZaXb\). Łatwo
 	zauważyć, że \(Z\) generuje język \(b^{\ast}\), zatem dla pewnego \(w' =
 	b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}}\), gdzie \(n_k = k - 1\),
@@ -72,8 +72,8 @@
 	\(w = b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}}\), gdzie \(n_{k} = k - 1\).
 	Skorzystajmy \(k - 1\) razy z produkcji \(X \longrightarrow ZaXb\), a
 	następnie z produkcji \(X \longrightarrow \varepsilon\), otrzymując
-	\[ \underbrace{Z a Z a \ldots a Z a}_{k - 1 \ \text{wystąpień} \ Z a} b^{k - 1}
-	\text{.} \]
+	\[ \underbrace{Z a Z a \ldots a Z a}_{k - 1 \ \text{wystąpień} \ Z a}
+	b^{k - 1} \text{.} \]
 	Z każdego nieterminala \(Z\) możemy uzyskać odpowiednią liczbę wystąpień
 	smymbolu \(b\), otrzymując słowo \(w\), co kończy dowód.
 	
@@ -94,12 +94,11 @@
 	\quad \underset{i \in \left[ 1, k \right] \cap \mathbb{Z}}{\exists} \ n_{i}
 	= k \text{.} \]
 	Łatwo też pokazać, że każde słowo tej postacji jest generowane przez \(S\).
-	Dla \(w = a b^{n_{1}} a b^{n_{2}} a \ldots a b^{n_{k}} a\) takiego, że
-	\(n_{i} = k\), dla konkretnego \(i \in \left[ 1, k \right] \cap
-	\mathbb{Z}\). Wówczas po skorzystaniu z produkcji \(S \longrightarrow
-	aXbYa\) wystarczy z \(X\) wygenerować słowo \(b^{n_{1}} a \ldots a
-	b^{n_{i - 1}} a b^{i - 1}\), a z \(Y\) słowo \(b^{k - i} a b^{n_{i + 1}} a
-	\ldots a b^{n_{k}}\).
+	Dla \(w = a b^{n_{1}} a \ldots a b^{n_{k}} a\) takiego, że \(n_{i} = k\),
+	dla konkretnego \(i \in \left[ 1, k \right] \cap \mathbb{Z}\), po
+	skorzystaniu z produkcji \(S \longrightarrow aXbYa\) wystarczy z \(X\)
+	wygenerować słowo \(b^{n_{1}} a \ldots a b^{n_{i - 1}} a b^{i - 1}\), a z
+	\(Y\) słowo \(b^{k - i} a b^{n_{i + 1}} a \ldots a b^{n_{k}}\).
 	
 	\medskip
 	
