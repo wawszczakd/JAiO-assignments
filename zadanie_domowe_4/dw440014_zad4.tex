@@ -1,0 +1,110 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+
+\title{JAiO zadanie 4}
+\author{Dominik Wawszczak}
+\date{2023-06-06}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak
+	
+	numer indeksu: 440014
+	
+	numer grupy: 6
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Zadanie 4}
+	
+	\medskip
+	
+	Rozpocznijmy od udowodnienia, że dany w treści zadania problem jest w klasie
+	NP. Łatwo wskazać maszynę Turinga, która dla danej formuły \(\varphi\)
+	niedeterministycznie wybiera wartościowanie \(v\), a następnie oblicza
+	\(\text{score} \left( \varphi, v \right)\) i sprawdza czy spełnione jest \(3
+	\leqslant \text{score} \left( \varphi, v \right) \leqslant 5\). Oczywiście
+	wszystkie opisane wyżej kroki można przeprowadzić w czasie wielomianowym.
+	
+	\medskip
+	
+	Pozostaje pokazać, że problem ten jest NP-trudny. W tym celu wskażemy
+	wielomianową redukcję problemu 3-CNF-SAT do problemu z treści zadania. Weźmy
+	więc dowolną formułę \(\psi\) w postaci 3-CNF. Stwórzmy nową formułę
+	\(\varphi\) w następujący sposób:
+	\begin{itemize}
+		\item do każdej klazuli w \(\psi\) dodajemy dwa razy literał \(x\);
+		\item do formuły \(\psi\) dodajemy klazulę \(\left( x \vee x \vee x \vee
+		      x \vee x \right)\).
+	\end{itemize}
+	Oczywiście mając formułę \(\psi\), formułę \(\varphi\) można łatwo obliczyć
+	w czasie wielomianowym. Zakładamy przy tym, że zmienna \(x\) jest nową
+	zmienną, niewystępującą w formule \(\psi\).
+	
+	\medskip
+	
+	Przykładowo, dla
+	\[ \psi \ = \ \left( \neg x_{1} \vee x_{2} \right) \wedge \left( x_{1} \vee
+	\neg x_{2} \vee \neg x_{3} \right) \wedge \left( x_{3} \right) \]
+	będziemy mieli
+	\[ \varphi \ = \ \left( \neg x_{1} \vee x_{2} \vee x \vee x \right) \wedge
+	\left( x_{1} \vee \neg x_{2} \vee \neg x_{3} \vee x \vee x \right) \wedge
+	\left( x_{3} \vee x \vee x \right) \wedge \left( x \vee x \vee x \vee x \vee
+	x \right) \text{.} \]
+	
+	\medskip
+	
+	Udowodnimy teraz następującą równoważność:
+	\[ \text{formuła} \ \psi \ \text{jest spełnialna} \quad \iff \quad
+	\text{istnieje wartościowanie} \ v \ \text{takie, że} \ 3 \leqslant
+	\text{score} \left( \varphi, v \right) \leqslant 5 \text{.} \]
+	
+	\medskip
+	
+	Załóżmy, że formuła \(\psi\) jest spełniona przez wartościowanie \(u\).
+	Wówczas \(1 \leqslant \text{score} \left( \psi, u \right)\). Ponadto
+	\(\text{score} \left( \psi, u \right) \leqslant 3\), gdyż formuła \(\psi\)
+	jest w formacie 3-CNF. Niech wartościowanie \(v\) będzie takie samo jak
+	\(u\) z dodatkowym przypisaniem \(x = \top\). Wtedy w każdej klauzuli
+	formuły \(\varphi\) są co najmniej \(3\) literały będące prawdziwe przy
+	wartościowaniu \(v\) -- co najmniej jeden z wartościowania \(u\) i dwa razy
+	\(x\), a w ostatniej klauzuli \(5\) razy \(x\). Zachodzi więc \(3 \leqslant
+	\text{score} \left( \varphi, v \right)\). Dodatkowo \(\text{score} \left(
+	\varphi, v \right) \leqslant 5\), ponieważ w każdej klauzuli jest co
+	najwyżej \(5\) literałów.
+	
+	\medskip
+	
+	Załóżmy teraz, że dla pewnego wartościowania \(v\) spełnione jest \(3
+	\leqslant \text{score} \left( \varphi, v \right) \leqslant 5\). Łatwo
+	zauważyć, że w wartościowaniu tym musi być \(x = \top\), gdyż w przeciwnym
+	wypadku ostatnia klauzula formuły \(\varphi\) byłaby fałszywa. Skoro \(3
+	\leqslant \text{score} \left( \varphi, v \right)\), to w każdej klauzuli
+	formuły \(\varphi\) jest co najmniej jeden literał inny niż \(x\) będący
+	prawdziwy przy wartościowaniu \(v\), ponieważ każda klauzula zawiera
+	dokładnie dwa literały \(x\) (z wyjątkiem ostatniej klauzuli). Oznacza to,
+	że wartościowanie \(u\) powstałe poprzez usunięcie z wartościowania \(v\)
+	przypisania \(x = \top\) spełnia formułę \(\psi\).
+	
+	\medskip
+	
+	Powyższa redukcja implikuje, że problem opisany w treści zadania jest
+	NP-zupełny, co kończy rozwiązanie zadania.
+	\begin{flushright}
+		\(\Box\)
+	\end{flushright}
+\end{document}
