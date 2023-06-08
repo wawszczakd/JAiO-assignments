@@ -1,0 +1,178 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[a4paper, margin = 2 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{wrapfig}
+\usepackage{hyperref}
+
+\title{JAiO zadanie 3}
+\author{Dominik Wawszczak}
+\date{2023-05-25}
+
+\begin{document}
+	\setlength{\parindent}{0 cm}
+	
+	Dominik Wawszczak
+	
+	numer indeksu: 440014
+	
+	numer grupy: 6
+	
+	\bigskip
+	\hrule
+	\bigskip
+	
+	\textbf{Zadanie 3}
+	
+	\medskip
+	
+	Rozpocznijmy od udowodnienia, że język \(L\) nie jest obliczalny.
+	
+	\medskip
+	
+	Przypuśćmy nie wprost, że \(L = L \left( \mathcal{H} \right)\), dla pewnej
+	maszyny Turinga \(\mathcal{H}\), która zawsze terminuje i zostawia na taśmie
+	\(1\), jeżeli dostanie na wejściu zakodowaną parę \(\left\langle u_{1},
+	u_{2} \right\rangle\), gdzie \(u_{1}\) i \(u_{2}\) są kodami podobnych
+	maszyn Turinga, lub \(0\) w przeciwnym wypadku. Wskażemy redukcję
+	\[ \text{HALT}_{\varepsilon} \ \leqslant_{f} \ L \text{,} \]
+	co da oczywistą sprzeczność, gdyż problem \(\text{HALT}_{\varepsilon}\) jest
+	nierozstrzygalny.
+	
+	\medskip
+	
+	Weźmy funkcję \(f\) o następującej definicji:
+	\[ f \left( \text{kod} \left( \mathcal{M} \right) \right) \ = \ \left\langle
+	\text{kod} \left( \mathcal{M} \right), \text{kod} \left( \mathcal{M}'
+	\right) \right\rangle \text{,} \]
+	gdzie \(\mathcal{M}\) jest dowolną maszyną Turinga, a \(\mathcal{M}'\)
+	maszyną Turinga działającą w sposób opisany poniżej:
+	\begin{itemize}
+		\item jeśli wejściowym napisem jest \(\varepsilon\), to maszyna
+		      \(\mathcal{M}'\) najpierw symuluje działanie maszyny
+		      \(\mathcal{M}\) na tym napisie, a następnie w miejsce wystąpienia
+		      pierwszego blanka wpisuje \(1\) i kończy działanie;
+		\item w przeciwnym wypadku symuluje działanie maszyny \(\mathcal{M}\) na
+		      napisie wejściowym, po czym kończy działanie.
+	\end{itemize}
+	Funkcja \(f\) jest oczywiście obliczalna.
+	
+	\medskip
+	
+	Zauważmy, że
+	\[ \mathcal{M} \ \text{terminuje na} \ \varepsilon \quad \iff \quad
+	\text{maszyny} \ \mathcal{M} \ \text{oraz} \ \mathcal{M}' \ \text{nie są
+	podobne,} \]
+	czyli równoważnie
+	\[ \text{kod} \left( \mathcal{M} \right) \ \in \ \text{HALT}_{\varepsilon}
+	\quad \iff \quad \left\langle \text{kod} \left( \mathcal{M} \right),
+	\text{kod} \left( \mathcal{M}' \right) \right\rangle \ \notin \ L
+	\text{.} \]
+	Wynika to z tego, że jeżeli \(\mathcal{M}\) terminuje na \(\varepsilon\),
+	to \(\mathcal{M}'\) również terminuje na \(\varepsilon\), jednak daje inny
+	wynik, więc nie są podobne. Z drugiej strony, jeśli maszyny \(\mathcal{M}\)
+	oraz \(\mathcal{M}'\) nie są podobne, to \(\mathcal{M}\) terminuje na
+	\(\varepsilon\), ponieważ w przeciwnym wypadku, obie maszyny \(\mathcal{M}\)
+	oraz \(\mathcal{M}'\) nie terminowałyby na \(\varepsilon\), a na wszystkich
+	innych wejściach dawałyby ten sam wynik lub obie by nie terminowały, zatem
+	byłyby podobne. Z implikacji w obie strony dostajemy więc równoważność.
+	
+	\medskip
+	
+	Z powyższego wynika, że język \(L\) nie jest obliczalny.
+	
+	\bigskip
+	
+	Udowodnimy teraz, że dopełnienie języka \(L\) jest częściowo obliczalne.
+	
+	\medskip
+	
+	Stworzymy maszynę Turinga \(\mathcal{M}\), która na wejściu będzie
+	przyjmować zakodowaną parę \(\left\langle u_{1}, u_{2} \right\rangle\) i
+	terminować, jeżeli \(u_{1}\) i \(u_{2}\) są kodami maszyn Turinga, które nie
+	są podobne. Maszyna \(\mathcal{M}\) będzie symulować działanie maszyn
+	\(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) na wszystkich możliwych
+	wejściach \(w \in \left\{ 0, 1 \right\} ^ {\ast}\), aż znajdzie wejście na
+	którym dają one różne wyniki, stwierdzając przy tym, że nie są podobne.
+	
+	\medskip
+	
+	Biorąc dowolną obliczalną bijekcję \(g : \mathbb{Z}^{+} \cup \left\{ 0
+	\right\} \rightarrow \left\{ 0, 1 \right\} ^ {\ast}\) możemy łatwo symulować
+	działanie maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) na
+	wszystkich możliwych wejściach, obliczająć wartości funkcji \(g\) dla
+	kolejnych liczb całkowitych nieujemnych. Przykładem takiej bijekcji jest
+	funkcja:
+	\[ g \left( n \right) \ = \ \text{zapis binarny liczby} \ n + 1 \ \text{bez
+	pierwszego znaku.} \]
+	Wówczas kilka pierwszych wartości funkcji \(g\) to: \(\varepsilon, 0, 1, 00,
+	01, 10, 11, 000, 001, 010, 011, 100 \ldots\).
+	
+	\medskip
+	
+	Problem napotkamy w momencie, gdy co najmniej jedna z maszyn
+	\(\mathcal{M}_{u_{1}}\), \(\mathcal{M}_{u_{2}}\) nie terminuje na pewnym
+	wejściu, a obie terminują i dają inne wyniki na innym, jeszcze nie
+	rozpatrzonym wejściu. Aby rozwiązać ten problem nie będziemy symulować
+	maszyn na wszystkich możliwych wejściach po kolei, lecz sumulację będziemy
+	przeprowadzać równolegle, na coraz większej liczbie wejść.
+	
+	\medskip
+	
+	Na ćwiczeniach dowodzone było, że dowolna maszyna Turinga, zamiast działać
+	na taśmie jednowymiarowej, może działać na taśmie dwuwymiarowej. Główna idea
+	opierała się na tym, żeby na taśmie trzymać wszystkie trójki \(\left(
+	\text{wiersz}, \text{kolumna}, \text{wartość} \right)\) wykorzystywanych
+	pól, jednak nie będziemy zagłębiać się w szczegóły.
+	
+	\medskip
+	
+	Maszyna \(\mathcal{M}\) będzie działać w fazach, trzymając numer aktualnej
+	fazy na taśmie. W \(n\)-tej fazie będzie przeprowadzać po jednym kroku
+	symulacji obu maszyn \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\)
+	na pierwszych \(n\) wejściach, tj. \(\left\{ g \left( 0 \right), g \left( 1
+	\right), g \left( 2 \right), \ldots, g \left( n - 1 \right) \right\}\).
+	
+	\medskip
+	
+	Kilka początkowych wierszy (taśm) naszej dwuwymiarowej taśmy jest potrzebne
+	na istotne rzeczy takie jak np.: kody \(u_{1}\) i \(u_{2}\), numer aktualnej
+	fazy i inne informacje niezbędne do pełnego sformalizowania działania
+	maszyny \(\mathcal{M}\). Niech więc \(k\) bedzie numerem pierwszego
+	nieużywanego wiersza. Wykorzystamy go do symulowania działania maszyny
+	\(\mathcal{M}_{u_{1}}\) na \(g \left( 0 \right)\). Wiersz \(k + 1\)
+	natomiast zostanie wykorzystany do symulacji maszyny \(\mathcal{M}_{u_{2}}\)
+	na \(g \left( 0 \right)\). Kolejne wiersze będą wykorzystywane do
+	symulowania \(\mathcal{M}_{u_{1}}\) albo \(\mathcal{M}_{u_{2}}\), w
+	zależności od parzystości numeru wiersza, na odpowiednich wartościach
+	funkcji \(g\).
+	
+	\medskip
+	
+	Jeśli maszyny \(\mathcal{M}_{u_{1}}\) i \(\mathcal{M}_{u_{2}}\) nie są
+	podobne, to maszyna \(\mathcal{M}\) w skończonym czasie znajdzie wejście,
+	na którym obie maszyny \(\mathcal{M}_{u_{1}}\), \(\mathcal{M}_{u_{2}}\)
+	terminują, dając różne wyniki, po czym sama również sterminuje.
+	
+	\bigskip
+	
+	Aby dokończyć rozwiązanie zadania, należy zauważyć, że język \(L\) nie jest
+	częściowo obliczalny, gdyż w przeciwnym wypadku język \(L\) byłby
+	obliczalny, co było udowodnione na wykładzie.
+	
+	\bigskip
+	
+	Z powyższego wynika, że odpowiedzi na pytania zawarte w podpunktach a), b)
+	oraz c) to kolejno ,,Nie.'', ,,Nie.'' oraz ,,Tak.'', co kończy rozwiązanie
+	zadania.
+	\begin{flushright}
+		\(\Box\)
+	\end{flushright}
+\end{document}
