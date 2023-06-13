@@ -53,8 +53,8 @@
 	zbiorze stanów \(Q\) i zbiorze symboli stosowych \(\Gamma\), działający w co
 	najwyżej \(k\) fazach, rozpoznający język \(L\). Przez resztę rozwiązania
 	zadania będziemy działać na słowie \(w = \left( a^{X} b^{X} \right) ^ {Y}
-	\in L\), gdzie \(X = 21 \cdot \left| Q \right| \cdot \left| \Gamma \right| +
-	37\), a \(Y = 69 \cdot k \cdot X + 420\).
+	\in L\), gdzie \(X = \left( 21 \cdot \left| Q \right| \cdot \left| \Gamma
+	\right| + 37 \right) ^ {2}\), a \(Y = 69 \cdot k \cdot X + 420\).
 	
 	\medskip
 	
@@ -84,16 +84,15 @@
 	Przypuśćmy nie wprost, że w pewnej fazie wystąpiło \(\left| Q \right|\)
 	kolejnych przejść niezmieniających stosu. Wówczas z Zasady Szufladkowej
 	Dirichleta wynika, że wśród tych przejść pewien stan \(q\) wystąpił co
-	najmniej \(2\) razy, ponieważ łącznie automat przeszedł przez \(\left| Q
-	\right| + 1\) stanów. Jeśli od pierwszego do drugiego znalezienia się w
-	stanie \(q\) automat wykonał same \(\varepsilon\)-przejścia, to nie miały
-	one sensu, ponieważ nic się nie zmieniło, możemy więc założyć, że słowo
-	wczytane w tym okresie jest niepuste. Łatwo widać, że słowo to można
-	napompować, a ponieważ ma ono długość co najwyżej \(\left| Q \right|\), to z
-	pewnością nie jest ono postaci \(\left( a^{X} b^{X} \right) ^ m\), dla
-	pewnego \(m \in \mathbb{Z}^{+}\), zatem na skutek tego pompowanie powstanie
-	nowe słowo nienależące do \(L\), po którym będzie istniał bieg akceptujący
-	automatu \(\mathcal{A}\). Otrzymana sprzeczność końćzy dowód lematu.
+	najmniej dwa razy, gdyż łącznie automat przeszedł przez \(\left| Q
+	\right| + 1\) stanów. Zauważmy, że słowo wczytane w tym okresie jest
+	niepuste, ponieważ założyliśmy, że nie ma \(\varepsilon\) przejść
+	niezmieniających stanu ani stosu. Łatwo widać, że słowo to można napompować,
+	a skoro ma ono długość co najwyżej \(\left| Q \right|\), to z pewnością nie
+	jest ono postaci \(\left( a^{X} b^{X} \right) ^ m\), dla pewnego \(m \in
+	\mathbb{Z}^{+}\), zatem na skutek tego pompowania powstanie nowe słowo
+	nienależące do \(L\), po którym będzie istniał bieg akceptujący automatu
+	\(\mathcal{A}\). Otrzymana sprzeczność końćzy dowód lematu.
 	
 	\medskip
 	
@@ -111,45 +110,65 @@
 	stałej \(Y\), ponieważ w przeciwnym wypadku z lematu 2 musiałby być wykonany
 	pop na pustym stosie. W trakcie tej fazy wczytany więc zostanie pełny blok
 	\(b^{X}\). Z doboru stałej \(X\) oraz Zasady Szufladkowej Dirichleta wynika,
-	że w trakcie przechodzenia tej fazy przez blok \(b^{X}\) dwa razy wystąpi
-	moment, że aktualny stan to pewne \(q\), a aktualny symbol na szczycie stosu
-	to pewne \(s\). Ponownie, wczytane słowo pomiędzy tymi dwoma momentami jest
-	niepuste, a dodatkowo ma długość co najwyżej \(\left| Q \right| \cdot \left|
-	\Gamma \right|\). Stos natomiast powiększy się o pewne słowo \(v\) długości
-	również co najwyżej \(\left| Q \right| \cdot \left| \Gamma \right|\),
-	którego ostatnia litera to oczywiście \(s\).
+	że w trakcie przechodzenia tej fazy przez blok \(b^{X}\) \(\left| Q \right|
+	+ 1\) razy wystąpi moment, że aktualny stan to pewne \(q\), a aktualny
+	symbol na szczycie stosu to pewne \(s\). Ponownie, wczytane słowo pomiędzy
+	każdymi dwoma momentami jest niepuste, a dodatkowo ma długość co najwyżej
+	\(\left| Q \right| \cdot \left| \Gamma \right|\) i składa się z samych liter
+	\(b\). Stos natomiast pomiędzy momentami \(i\)-tym a \(i + 1\)-szym
+	powiększy się o pewne słowo \(v_{i}\) długości również co najwyżej \(\left|
+	Q \right| \cdot \left| \Gamma \right|\), którego ostatnia litera to
+	oczywiście \(s\).
 	\begin{center}
 		\includegraphics[width = 0.9 \textwidth]{./image-1.pdf}
 	\end{center}
 	
 	\medskip
 	
-	Chcemy teraz podwoić fragment przeczytany pomiędzy dwoma opisanymi w
-	poprzednim akapicie momentami. Oczywiście skutkiem takiego podwojenia będzie
-	uzyskanie nowego słowa \(w' \notin L\). Rozważmy dwa przypadki:
+	Rozważmy dwa przypadki:
 	\begin{enumerate}
 		\item Symbol \(s\) do końca biegu automatu pozostaje na stosie.
 		      
-		      Łatwo wówczas zauważyć, że słowo \(w'\) zostanie zwyczajnie
-		      zaakceptowane przez automat \(\mathcal{A}\), ponieważ podwojony
-		      fragment dopisuje tylko słowo \(v\) do stosu, a skoro litera
+		      Łatwo wówczas zauważyć, że możemy podwoić słowo złożone
+		      przeczytane pomiędzy pierwszym a drugim momentem, uzyskując w ten
+		      sposób nowe słowo \(w' \notin L\), bo podwojony fragment składa
+		      się z samych liter \(b\). Słowo to zostanie zwyczajnie
+		      zaakceptowane przez automat \(\mathcal{A}\), gdyż podwojony
+		      fragment dopisuje tylko słowo \(v_{1}\) do stosu, a skoro litera
 		      bezpośrednio pod tym słowem nie zostanie zdjęta, to z perspektywy
-		      automatu nie będzie różnicy.
+		      automatu nie będzie różnicy, czyli sprzeczność, ponieważ automat
+		      \(\mathcal{A}\) zaakceptuje słowo nienależące do \(L\).
 		
-		\item W przeciwnym wypadku, w dalszej części biegu automatu istnieje
-		      spójny fragment ciągu przejść odpowiadający za zdjecie ze stosu
-		      słowa \(v\). Bardziej formalnie, na początku tego ciągu stos jest
-		      postaci \(pref \cdot v\), a na koniec po prostu \(pref\). W
-		      trakcie natomiast na stosie mogą być wykonywane zarówno operacji
-		      push, jak i pop. Zmodyfikujmy słowo \(w'\) tak, aby ten drugi
-		      fragment również był podwojony. Słowo to dalej nie należy do
-		      języka \(L\), ponieważ nie zgadza się liczba liter \(b\) w tym
-		      pierwszym podwojonym fragmencie (w drugim może być cokolwiek,
-		      istotne jest to, że występuje on później). Tak jak w poprzednim
-		      przypadku, z perspektywy automatu nie będzie różnicy i ponownie
-		      będzie wykonywał takie przejścia jak w biegu akceptującym po
-		      słowie \(w\), w oparciu jedynie o aktualny stan, aktualną literę i
-		      aktualny symbol na szczycie stosu.
+		\item W przeciwnym wypadku, każde ze słów \(v_{1}, v_{2}, \ldots,
+		      v_{\left| Q \right|}\) zostanie kiedyś ze stosu zdjęte. Innymi
+		      słowy, istnieje spójny fragment ciągu przejść odpowiadający za
+		      zdjecie ze stosu słowa \(v_{1} v_{2} \ldots v_{\left| Q
+		      \right|}\). Bardziej formalnie, na początku tego ciągu stos jest
+		      postaci \(pref \cdot v_{1} v_{2} \ldots v_{\left| Q \right|}\), a
+		      na koniec po prostu \(pref\). W trakcie natomiast na stosie mogą
+		      być wykonywane zarówno operacje push, jak i pop. Fragment ten
+		      można podzielić na \(\left| Q \right|\) mniejszych fragmentów w
+		      taki sposób, że w \(i\)-tym ze stosu zostaje zdjęte słowo
+		      \(v_{i}\) (,,zdjęte'' jako efekt końcowy -- w trakcie mogą dziać
+		      się różne rzeczy).
+		      
+		      \medskip
+		      
+		      Każdy z tych fragmentów kończy w jakimś stanie, z którego
+		      następnie rozpoczyna się kolejny fragment. Z Zasady Szufladkowej
+		      Dirichleta wynika, że pewne dwa z tych stanów będą takie same.
+		      Możemy podwoić konkatenację liter odpowiadających fragmentom
+		      pomiędzy nimi, jednocześnie podwajając litery przeczytane przez
+		      stos z odpowiedniego fragmentu wspomnianej wcześniej fazy push.
+		      Oczywiście, jak zostało zaznaczone wcześniej, będą to tylko litery
+		      \(b\). W tym przypadku zatem również otrzymamy nowe słowo \(w'
+		      \notin L\), które automat zaakceptuje, gdyż z jego perspektywy
+		      nie będzie różnicy -- wykonuje przejścia w oparciu jedynie o
+		      aktualny stan, symbol na szczycie stosu i czytaną literę. W tym
+		      przypadku jednak nieco trudniejsze jest zauważenie, że \(w' \notin
+		      L\). Wynika to z tego, że podwojona lewa część składa się z samych
+		      liter \(b\), zatem liczba tych liter w nowym bloku \(b\) z
+		      pewnością będzie różna od liczby liter \(a\) w bloku poprzednim.
 	\end{enumerate}
 	
 	\medskip
