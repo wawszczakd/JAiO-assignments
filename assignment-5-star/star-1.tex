@@ -84,12 +84,12 @@
 	Przypuśćmy nie wprost, że w pewnej fazie wystąpiło \(\left| Q \right|\)
 	kolejnych przejść niezmieniających stosu. Wówczas z Zasady Szufladkowej
 	Dirichleta wynika, że wśród tych przejść pewien stan \(q\) wystąpił co
-	najmniej dwa razy, gdyż łącznie automat przeszedł przez \(\left| Q
-	\right| + 1\) stanów. Zauważmy, że słowo wczytane w tym okresie jest
-	niepuste, ponieważ założyliśmy, że nie ma \(\varepsilon\) przejść
-	niezmieniających stanu ani stosu. Łatwo widać, że słowo to można napompować,
-	a skoro ma ono długość co najwyżej \(\left| Q \right|\), to z pewnością nie
-	jest ono postaci \(\left( a^{X} b^{X} \right) ^ m\), dla pewnego \(m \in
+	najmniej dwa razy, gdyż łącznie automat przeszedł przez \(\left| Q \right| +
+	1\) stanów. Zauważmy, że słowo wczytane w tym okresie jest niepuste,
+	ponieważ założyliśmy, że nie ma \(\varepsilon\) przejść niezmieniających
+	stanu ani stosu. Łatwo widać, że słowo to można napompować, a skoro ma ono
+	długość co najwyżej \(\left| Q \right|\), to z pewnością nie jest ono
+	postaci \(\left( a^{X} b^{X} \right) ^ m\), dla pewnego \(m \in
 	\mathbb{Z}^{+}\), zatem na skutek tego pompowania powstanie nowe słowo
 	nienależące do \(L\), po którym będzie istniał bieg akceptujący automatu
 	\(\mathcal{A}\). Otrzymana sprzeczność końćzy dowód lematu.
@@ -162,11 +162,11 @@
 		      stos z odpowiedniego fragmentu wspomnianej wcześniej fazy push.
 		      Oczywiście, jak zostało zaznaczone wcześniej, będą to tylko litery
 		      \(b\). W tym przypadku zatem również otrzymamy nowe słowo \(w'
-		      \notin L\), które automat zaakceptuje, gdyż z jego perspektywy
-		      nie będzie różnicy -- wykonuje przejścia w oparciu jedynie o
-		      aktualny stan, symbol na szczycie stosu i czytaną literę. W tym
-		      przypadku jednak nieco trudniejsze jest zauważenie, że \(w' \notin
-		      L\). Wynika to z tego, że podwojona lewa część składa się z samych
+		      \notin L\), które automat zaakceptuje, gdyż z jego perspektywy nie
+		      będzie różnicy -- wykonuje przejścia w oparciu jedynie o aktualny
+		      stan, symbol na szczycie stosu i czytaną literę. W tym przypadku
+		      jednak nieco trudniejsze jest zauważenie, że \(w' \notin L\).
+		      Wynika to z tego, że podwojona lewa część składa się z samych
 		      liter \(b\), zatem liczba tych liter w nowym bloku \(b\) z
 		      pewnością będzie różna od liczby liter \(a\) w bloku poprzednim.
 	\end{enumerate}
